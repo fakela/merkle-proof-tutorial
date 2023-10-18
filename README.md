@@ -210,6 +210,8 @@ node merkleTreeWhitelist.js
 
 You'll see the output, which will inform you whether `ama@example.com` is on the whitelist or not. Using `merklekjs`, we've built a Merkle Tree from a list of email addresses, generated a Merkle Proof for a specific email, and verified its presence. This process demonstrates how Merkle Trees provide an efficient way to prove the existence of data without revealing the entire dataset, ensuring both data integrity and privacy.
 
+For the full source code, check out this [GitHub repository](https://github.com/fakela/merkle-proof-tutorial/).
+
 ## Use cases of Merkle Trees and Merkle Proofs
 While Merkle Trees and Merkle Proofs have their distinct primary functions, they often work hand-in-hand to achieve data integrity, verification, and efficiency in various applications, most notably in blockchains and cryptographic systems.
 
