@@ -18,7 +18,7 @@ For example, if you take the text _"Hello, World!"_ and hash it using the SHA-25
 ## What is Merkle Tree
 A Merkle Tree, sometimes called a hash tree or binary hash tree, is like a family tree for data. A Merkle Tree is a hierarchical tree-like data structure composed of hash values, often used to efficiently summarize and verify the integrity of a large dataset. It is designed to help us prove that a specific piece of data belongs to a larger dataset without having to deal with all the data.
 
-[Merkle-tree-meme](/images/merkle-tree-meme.jpeg)
+![Merkle-tree-meme](/images/merkle-tree-meme.jpeg)
 
 ### Structure of a Merkle Tree
 
@@ -171,7 +171,7 @@ node merkleTreeWhitelist.js
 
 You'll see the output, which will tell you whether `ama@example.com` is on the whitelist or not.
 
-[whitelist-output](/images/whitelist.png)
+![whitelist-output](/images/whitelist.png)
 
 
 This above code example demonstrates the entire process of setting up, creating a Merkle Tree, generating a Merkle Proof, and verifying the proof for whitelisting email addresses in a web3 application.
@@ -204,4 +204,4 @@ In many use-cases, Merkle trees and proofs are used together. For example, in a 
 ## Conclusion
 Merkle Trees and Merkle Proofs are fundamental concepts in blockchain and data verification. They provide a powerful way to ensure data integrity and efficiently verify the existence of specific data within a large dataset. Whether you're building a blockchain application, securing data, or optimizing data synchronization, understanding Merkle Trees and Proofs is a valuable skill in the world of technology and cryptography.
 
-[Merkle-tree-meme](/images/merkle-all-the-things.jpeg)
+![Merkle-tree-meme](/images/merkle-all-the-things.jpeg)
