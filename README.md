@@ -121,7 +121,7 @@ This will download and install the library along with its dependencies.
 
 - Create a new JavaScript file in your project directory, e.g., `merkleTreeWhitelist.js`, and open it in a code editor of your choice.
 
-## Step 2: Construct the Merkle Tree
+### Step 2: Construct the Merkle Tree
 
 - At the beginning of the `merkleTreeWhitelist.js` file, import the `merkletreejs` library and Node's built-in `crypto` module:
 
