@@ -1,17 +1,17 @@
 # Understanding Merkle Proofs in Blockchain: A Simple Guide
 
-Imagine you have a gigantic pile of data, like a long list of transactions in a blockchain or a huge database of user records. Now, picture yourself trying to find out if a specific item exists in this massive heap. The typical way to do this is by sifting through everything, which is not only slow but also inefficient. However, there's a clever solution called Merkle Proofs that can make this process super quick and secure. _These proofs are named after Ralph Merkle, who came up with the concept in 1979._
+Imagine you have a gigantic pile of data, like a long list of transactions in a blockchain or a huge database of user records. Now, picture yourself trying to find out if a specific item exists in this massive heap. The typical way to do this is by sifting through everything, which is not only slow but also inefficient. However, there's a clever solution called Merkle Proofs that can make this process super quick and secure. _Merkle Proofs are named after Ralph Merkle, who came up with the concept in 1979._
 
 In this tutorial, we're going to break down the idea of Merkle Trees and how they help create and validate Merkle Proofs. So grab your favorite cup of joe, sit back, and let's get started!
 
 ## First, What's a "Hash"?
 
 To understand Merkle Proofs and Merkle Trees, you need to know about something called hashing. A hash function is like a magic math tool that takes an input (also known as a 'message') and turns it into a fixed-size string of characters. This string usually consists of numbers and letters. The key properties of a good hash function are:
-- Deterministic: The same input will always produce the same output (hash value). So, if you hash the same data multiple times, you will get the same hash value every time.
-- Fast Computation: It's quick to calculate the hash value for any given input. It should take very little time to compute the hash value, even for large amounts of data.
-- Pre-image Resistance: It should be computationally infeasible to reverse the process and derive the original input from the hash value.
-- Collision Resistance: It should be extremely unlikely for two different inputs to produce the same hash value.
-- Fixed Size: No matter how large or small your input data is, the hash value will always be of the same length. For example, a common hash function, SHA-256, produces a 256-bit (64-character) hash value.
+- **Deterministic**: The same input will always produce the same output (hash value). So, if you hash the same data multiple times, you will get the same hash value every time.
+- **Fast Computation**: It's quick to calculate the hash value for any given input. It should take very little time to compute the hash value, even for large amounts of data.
+- **Pre-image Resistance**: It should be computationally infeasible to reverse the process and derive the original input from the hash value.
+- **Collision Resistance**: It should be extremely unlikely for two different inputs to produce the same hash value.
+- **Fixed Size**: No matter how large or small your input data is, the hash value will always be of the same length. For example, a common hash function, SHA-256, produces a 256-bit (64-character) hash value.
 
 For example, if you take the text _"Hello, World!"_ and hash it using the SHA-256 algorithm, you'll get something like this: _"a591a6d40bf420404a011733cfb7b190d62c65bf0bcda32b57b277d9ad9f146"_.
 
@@ -54,7 +54,7 @@ This structure allows for efficient verification of data integrity by comparing 
 
 
 ## So, What's a Merkle Proof?
-Now that we've covered Merkle Trees, let's look at what Merkle proof is. A Merkle proof is a cryptographic technique used to prove the existence (or non-existence) to prove the existence of a specific piece of data within a larger dataset stored in a Merkle Tree without revealing the entire dataset. It is a method for efficient data verification. It's like providing evidence that a particular item is in a box without opening the box or showing its contents. This cryptographic technique that enables the efficient verification of data within a larger dataset without revealing the entire dataset. 
+Now that we've covered Merkle Trees, let's look at what Merkle Proof is. A Merkle proof is a cryptographic technique used to prove the existence (or non-existence) to prove the existence of a specific piece of data within a larger dataset stored in a Merkle Tree without revealing the entire dataset. It is a method for efficient data verification. It's like providing evidence that a particular item is in a box without opening the box or showing its contents. This cryptographic technique enables the efficient verification of data within a larger dataset without revealing the entire dataset. 
 
 ## Structure of a Merkle Proof:
 - **Leaf Nodes**: In a Merkle Tree, the individual data items (in this case, email addresses) are stored as leaf nodes at the bottom of the tree. Each leaf node is hashed (usually using a cryptographic hash function) to produce a unique hash value.
@@ -62,7 +62,7 @@ Now that we've covered Merkle Trees, let's look at what Merkle proof is. A Merkl
 - **Merkle Path**: A Merkle Proof consists of the path from the leaf node containing the data you want to prove (the target) up to the root node. This path includes the hashes of all the sibling nodes along the way.
 
 ## How Do Merkle Proofs Work?
-Imagine you're building a decentralized application (DApp) where you want to grant access only to users with specific email addresses. To efficiently manage access control, you can use a Merkle Tree to whitelist email addresses. For this example, we'll use the merkle-tree-solidity library to implement the Merkle Tree.
+Imagine you're building a decentralized application (DApp) where you want to grant access only to users with specific email addresses. To efficiently manage access control, you can use a Merkle Tree to whitelist email addresses. For this example, we'll use the `merkletreejs` library to implement the Merkle Tree.
 
 Here's how you can do it:
 - Before we start, make sure you have Node.js and npm (Node Package Manager) installed on your system. You can download and install Node.js from the official [website] (https://nodejs.org/)
@@ -82,10 +82,10 @@ npm init -y
 
 This command will create a `package.json` file in your project directory.
 
-- Install the `merkle-tree-solidity` library using npm:
+- Install the `merkletreejs` library using npm:
 
 ```bash
-npm install merkle-tree-solidity
+npm install merkletreejs
 ```
 
 This will download and install the library and its dependencies.
@@ -178,24 +178,24 @@ This above code example demonstrates the entire process of setting up, creating 
 
 
 ## Merkle Trees vs. Merkle Proofs
-Wile Merkle trees and Merkle proofs have their distinct primary functions, they often work hand-in-hand to achieve data integrity, verification, and efficiency in various applications, most notably in blockchains and cryptographic systems.
+While Merkle Trees and Merkle Proofs have their distinct primary functions, they often work hand-in-hand to achieve data integrity, verification, and efficiency in various applications, most notably in blockchains and cryptographic systems.
 
-- **Data Integrity**: Merkle trees, with their hierarchical structure, enable efficient verification of large sets of data. The topmost hash (Merkle root) represents a summary of all the data below it. If any piece of data changes, the Merkle root will change as well.
+- **Data Integrity**:  Merkle Trees, with their hierarchical structure, enable efficient verification of large sets of data. The topmost hash (Merkle root) represents a summary of all the data below it. If any piece of data changes, the Merkle root will change as well.
 
 - **Efficiency**: They allow for efficient data verification. Instead of comparing large sets of data, one can compare just the Merkle roots.
 
-- **Privacy**: Merkle trees can provide a summary (via the Merkle root) without revealing the individual data elements. This is useful in systems where privacy or data size might be a concern.
+- **Privacy**:  Merkle Trees can provide a summary (via the Merkle root) without revealing the individual data elements. This is useful in systems where privacy or data size might be a concern.
 
 **Merkle Proofs**
 
-- **Membership Verification**: Merkle proofs allow for the verification of a specific piece of data's membership within a set, without revealing or processing the entire set. This is especially useful in systems like blockchains where a lightweight client wants to verify a particular transaction without downloading the entire blockchain.
+- **Membership Verification**: Merkle Proofs allow for the verification of a specific piece of data's membership within a set, without revealing or processing the entire set. This is especially useful in systems like blockchains where a lightweight client wants to verify a particular transaction without downloading the entire blockchain.
 
-- **Non-membership Verificatio**n: Similarly, Merkle proofs can prove that a piece of data is not a member of a set.
+- **Non-membership Verificatio**n: Similarly, Merkle Proofs can prove that a piece of data is not a member of a set.
 
 - **Efficiency:** They offer a way to provide evidence of membership (or non-membership) without the need to transfer or verify large amounts of data. This is particularly useful for lightweight or resource-constrained systems.
 
 ### Shared Usecases:
-In many use-cases, Merkle trees and proofs are used together. For example, in a blockchain: 
+In many use-cases, Merkle Trees and Proofs are used together. For example, in a blockchain: 
 
 - Merkle Trees are used to summarize all the transactions in a block, resulting in a Merkle root that is then stored in the block header.
 - Merkle Proofs are used to prove the inclusion (or absence) of a specific transaction within a block without revealing all other transactions.
