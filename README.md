@@ -21,10 +21,10 @@ Are you ready for a deeper dive? In this tutorial, we will explain what a Merkle
    - [Step 3: Verifying with Merkle Proofs](#step-3-verifying-with-merkle-proofs)
    - [Step 4: Hashing Functions](#step-4-hashing-functions)
    - [Step 5: Execute the Code](#step-5-execute-the-code)
-5. [Usescase of Merkle Trees and Merkle Proofs](#usescase-of-merkle-trees-and-merkle-proofs)
-   - [Merkle Tree](#merkle-tree-usecase)
-   - [Merkle Proofs](#merkle-proofs-usecase)
-   - [Shared Usecases](#shared-usecases)
+5. [Usecase of Merkle Trees and Merkle Proofs](#use-cases-of-merkle-trees-and-merkle-proofs)
+   - [Merkle Tree](#merkle-tree-use-cases)
+   - [Merkle Proofs](#merkle-proofs-use-cases)
+   - [Shared Usecases](#shared-use-cases)
 6. [Conclusion](#conclusion)
 
 
@@ -210,10 +210,10 @@ node merkleTreeWhitelist.js
 
 You'll see the output, which will inform you whether `ama@example.com` is on the whitelist or not. Using `merklekjs`, we've built a Merkle Tree from a list of email addresses, generated a Merkle Proof for a specific email, and verified its presence. This process demonstrates how Merkle Trees provide an efficient way to prove the existence of data without revealing the entire dataset, ensuring both data integrity and privacy.
 
-## Usescase of Merkle Trees and Merkle Proofs
+## Use cases of Merkle Trees and Merkle Proofs
 While Merkle Trees and Merkle Proofs have their distinct primary functions, they often work hand-in-hand to achieve data integrity, verification, and efficiency in various applications, most notably in blockchains and cryptographic systems.
 
-### Merkle Tree usecase
+### Merkle Tree use cases
 
 - **Data Integrity**:  Merkle Trees, with their hierarchical structure, enable efficient verification of large sets of data. The topmost hash (Merkle root) represents a summary of all the data below it. If any piece of data changes, the Merkle root will change as well.
 
@@ -221,7 +221,7 @@ While Merkle Trees and Merkle Proofs have their distinct primary functions, they
 
 - **Privacy**:  Merkle Trees can provide a summary (via the Merkle root) without revealing the individual data elements. This is useful in systems where privacy or data size might be a concern.
 
-### Merkle Proofs usecase
+### Merkle Proofs use cases
 
 - **Membership Verification**: Merkle Proofs allow for the verification of a specific piece of data's membership within a set, without revealing or processing the entire set. This is especially useful in systems like blockchains where a lightweight client wants to verify a particular transaction without downloading the entire blockchain.
 
@@ -229,8 +229,8 @@ While Merkle Trees and Merkle Proofs have their distinct primary functions, they
 
 - **Efficiency:** They offer a way to provide evidence of membership (or non-membership) without the need to transfer or verify large amounts of data. This is particularly useful for lightweight or resource-constrained systems.
 
-### Shared Usecases:
-In many use-cases, Merkle Trees and Proofs are used together. For example, in a blockchain: 
+### Shared Use cases:
+In many use cases, Merkle Trees and Proofs are used together. For example, in a blockchain: 
 
 - Merkle Trees are used to summarize all the transactions in a block, resulting in a Merkle root that is then stored in the block header.
 - Merkle Proofs are used to prove the inclusion (or absence) of a specific transaction within a block without revealing all other transactions.
