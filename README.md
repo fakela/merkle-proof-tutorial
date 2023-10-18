@@ -208,7 +208,7 @@ These hashing functions transform our email addresses into fixed-size strings of
 node merkleTreeWhitelist.js
 ```
 
-You'll see the output, which will inform you whether `ama@example.com` is on the whitelist or not. Using `merklekjs`, we've built a Merkle Tree from a list of email addresses, generated a Merkle Proof for a specific email, and verified its presence. This process demonstrates how Merkle Trees provide an efficient way to prove the existence of data without revealing the entire dataset, ensuring both data integrity and privacy.
+You'll see the output, which will inform you whether `ama@example.com` is on the whitelist or not. Using `merklektreejs`, we've built a Merkle Tree from a list of email addresses, generated a Merkle Proof for a specific email, and verified its presence. This process demonstrates how Merkle Trees provide an efficient way to prove the existence of data without revealing the entire dataset, ensuring both data integrity and privacy.
 
 For the full source code, check out this [GitHub repository](https://github.com/fakela/merkle-proof-tutorial/).
 
