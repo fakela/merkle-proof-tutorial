@@ -1,10 +1,10 @@
 # Understanding Merkle Proofs in Blockchain: A Simple Guide
 
-Merkle Proof is an important cryptographic concept used in blockchain to ensure data integrity. To illustrate this concept, imagine a library with millions of books. Now, if someone wants to prove they have a specific book from this library without showing every book title, they'd use a Merkle Proof. This proof would be like a short list showing the section, shelf, and position of the book, leading the verifier directly to it without revealing other titles.
+Merkle Proof is an essential cryptographic concept used in blockchain to ensure data integrity. To illustrate this concept, imagine a library with millions of books. Now, if someone wants to prove they have a specific book from this library without showing every book title, they'd use a Merkle Proof. This proof would be like a short list showing the section, shelf, and position of the book, leading the verifier directly to it without revealing other titles.
 
-So, Merkle Proof is used in scenarios where you need to prove that a specific piece of data exists (or doesn't) within a larger dataset. But that's not all there is to it. A Merkle Proof cannot exist without a Merkle Tree. When you hear them mentioned together, it's because they work in tandem: the Merkle Tree holds the data, and the Merkle Proof verifies a piece of that data. So back to our library analogy, a Merkle Tree is a catalog that lists the summary of all books. 
+So, a Merkle Proof is used in scenarios where there's a need to prove that a specific piece of data exists (or doesn't exist) within a larger dataset. But that's not all there is to it. A Merkle Proof cannot exist without a Merkle Tree. When you hear them mentioned together, it's because they work in tandem: the Merkle Tree holds the data, and the Merkle Proof verifies a piece of that data. So back to our library analogy, a Merkle Tree is a catalog that lists the summary of all books.
 
-Ready for a deeper dive? In this tutorial, we will explain what Merkle tree is and how Merkle Proof works. So grab your favorite cup of joe, sit back, and let's get started!
+Are you ready for a deeper dive? In this tutorial, we will explain what a Merkle Tree is and how Merkle Proofs work. So grab your favorite cup of Joe, sit back, and let's get started!
 
 
 ## Table of contents
@@ -40,9 +40,9 @@ To understand Merkle Proofs and Merkle Trees, you need to know about something c
 For example, if you take the text _"Hello, World!"_ and hash it using the SHA-256 algorithm, you'll get something like this: _"a591a6d40bf420404a011733cfb7b190d62c65bf0bcda32b57b277d9ad9f146"_.
 
 ## What is Merkle Tree
-A Merkle Tree, also known as a hash tree, is a hierarchical data structure used to efficiently verify the integrity of large datasets. It acts like a family tree for data, where each leaf node represents a piece of data, often in the form of a hash. Non-leaf nodes are cryptographic hashes of their child nodes, ultimately leading to a single hash at the top called the 'Merkle Root.' This Merkle Root serves as a concise summary of all the data below it.
+A Merkle Tree, also known as a hash tree, is a hierarchical data structure used to efficiently verify the integrity of large datasets. It acts like a family tree for data, where each leaf node represents a piece of data, often in the form of a hash. Non-leaf nodes are cryptographic hashes of their child nodes, ultimately leading to a single hash at the top called the **Merkle Root**. This Merkle Root serves as a concise summary of all the data below it.
 
-The brilliance of this system lies in its ability to detect any tampering or changes in the data. Even a slight modification in the data results in a significant change in the Merkle Root. To prove that an element belongs to the dataset, you only need the hashes along the branch of the tree leading to that element, not the entire tree. This forms the foundation of Merkle Proofs.
+The brilliance of this lies in its ability to detect any tampering or changes in the data. Even a slight modification in the data results in a significant change in the Merkle Root. To prove that an element belongs to the dataset, you only need the hashes along the branch of the tree leading to that element, not the entire tree. This forms the foundation of Merkle Proofs.
 
 ![Merkle-tree-meme](/images/merkle-tree-meme.jpeg)
 
@@ -234,7 +234,6 @@ In many use-cases, Merkle Trees and Proofs are used together. For example, in a 
 
 - Merkle Trees are used to summarize all the transactions in a block, resulting in a Merkle root that is then stored in the block header.
 - Merkle Proofs are used to prove the inclusion (or absence) of a specific transaction within a block without revealing all other transactions.
-
 
 ## Conclusion
 Merkle Trees and Merkle Proofs are fundamental concepts in blockchain and data verification. They provide a powerful way to ensure data integrity and efficiently verify the existence of specific data within a large dataset. Whether you're building a blockchain application, securing data, or optimizing data synchronization, understanding Merkle Trees and Proofs is a valuable skill in the world of technology and cryptography.
