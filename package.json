@@ -1,0 +1,17 @@
+{
+  "name": "merkle-proof-tutorial",
+  "version": "1.0.0",
+  "description": "Imagine having a vast collection of data, like a list of transactions in a blockchain or a database of users. To check if a specific item is in this massive dataset, you'd typically have to sift through the entire thing, which can be slow and inefficient. However, there's a clever solution called Merkle Proofs that can make this process efficient and secure. This proof is named after Ralph Merkle, who patented the concept in 1979.",
+  "main": "merkleTreeWhitelist.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "merkle-tree-solidity": "^1.0.8",
+    "merkletreejs": "^0.3.10"
+  }
+}
