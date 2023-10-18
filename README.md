@@ -1,8 +1,32 @@
 # Understanding Merkle Proofs in Blockchain: A Simple Guide
 
-Imagine you have a gigantic pile of data, like a long list of transactions in a blockchain or a huge database of user records. Now, picture yourself trying to find out if a specific item exists in this massive heap. The typical way to do this is by sifting through everything, which is not only slow but also inefficient. However, there's a clever solution called Merkle Proofs that can make this process super quick and secure. _Merkle Proofs are named after Ralph Merkle, who came up with the concept in 1979._
+Merkle Proof is an important cryptographic concept used in blockchain to ensure data integrity. To illustrate this concept, imagine a library with millions of books. Now, if someone wants to prove they have a specific book from this library without showing every book title, they'd use a Merkle Proof. This proof would be like a short list showing the section, shelf, and position of the book, leading the verifier directly to it without revealing other titles.
 
-In this tutorial, we're going to break down the idea of Merkle Trees and how they help create and validate Merkle Proofs. So grab your favorite cup of joe, sit back, and let's get started!
+So, Merkle Proof is used in scenarios where you need to prove that a specific piece of data exists (or doesn't) within a larger dataset. But that's not all there is to it. A Merkle Proof cannot exist without a Merkle Tree. When you hear them mentioned together, it's because they work in tandem: the Merkle Tree holds the data, and the Merkle Proof verifies a piece of that data. So back to our library analogy, a Merkle Tree is a catalog that lists the summary of all books. 
+
+Ready for a deeper dive? In this tutorial, we will explain what Merkle tree is and how Merkle Proof works. So grab your favorite cup of joe, sit back, and let's get started!
+
+
+## Table of contents
+
+1. [First, What's a "Hash"?](#first-whats-a-hash)
+2. [What is Merkle Tree](#what-is-merkle-tree)
+   - [Structure of a Merkle Tree](#structure-of-a-merkle-tree)
+   - [Example of a Merkle Tree](#example-of-a-merkle-tree)
+3. [So, What's a Merkle Proof?](#so-whats-a-merkle-proof)
+   - [Structure of a Merkle Proof](#structure-of-a-merkle-proof)
+4. [How Does Merkle Proofs Work?](#how-does-merkle-proofs-work)
+   - [Step 1: Setting Up the Project](#step-1-setting-up-the-project)
+   - [Step 2: Construct the Merkle Tree](#step-2-construct-the-merkle-tree)
+   - [Step 3: Verifying with Merkle Proofs](#step-3-verifying-with-merkle-proofs)
+   - [Step 4: Hashing Functions](#step-4-hashing-functions)
+   - [Step 5: Execute the Code](#step-5-execute-the-code)
+5. [Usescase of Merkle Trees and Merkle Proofs](#usescase-of-merkle-trees-and-merkle-proofs)
+   - [Merkle Tree](#merkle-tree-usecase)
+   - [Merkle Proofs](#merkle-proofs-usecase)
+   - [Shared Usecases](#shared-usecases)
+6. [Conclusion](#conclusion)
+
 
 ## First, What's a "Hash"?
 
@@ -16,7 +40,9 @@ To understand Merkle Proofs and Merkle Trees, you need to know about something c
 For example, if you take the text _"Hello, World!"_ and hash it using the SHA-256 algorithm, you'll get something like this: _"a591a6d40bf420404a011733cfb7b190d62c65bf0bcda32b57b277d9ad9f146"_.
 
 ## What is Merkle Tree
-A Merkle Tree, sometimes called a hash tree or binary hash tree, is like a family tree for data. A Merkle Tree is a hierarchical tree-like data structure composed of hash values, often used to efficiently summarize and verify the integrity of a large dataset. It is designed to help us prove that a specific piece of data belongs to a larger dataset without having to deal with all the data.
+A Merkle Tree, also known as a hash tree, is a hierarchical data structure used to efficiently verify the integrity of large datasets. It acts like a family tree for data, where each leaf node represents a piece of data, often in the form of a hash. Non-leaf nodes are cryptographic hashes of their child nodes, ultimately leading to a single hash at the top called the 'Merkle Root.' This Merkle Root serves as a concise summary of all the data below it.
+
+The brilliance of this system lies in its ability to detect any tampering or changes in the data. Even a slight modification in the data results in a significant change in the Merkle Root. To prove that an element belongs to the dataset, you only need the hashes along the branch of the tree leading to that element, not the entire tree. This forms the foundation of Merkle Proofs.
 
 ![Merkle-tree-meme](/images/merkle-tree-meme.jpeg)
 
@@ -28,7 +54,7 @@ A Merkle Tree, sometimes called a hash tree or binary hash tree, is like a famil
 
 - **Root Node**: At the top of the tree is the root node, which is the ultimate summary of the entire dataset. It represents a single hash value, computed from the hashes of the internal nodes beneath it.
 
-Let's look at a Merkle Tree example
+Let's look at a Merkle Tree example.
 
 ### Example of a Merkle Tree:
 
@@ -54,18 +80,21 @@ This structure allows for efficient verification of data integrity by comparing 
 
 
 ## So, What's a Merkle Proof?
-Now that we've covered Merkle Trees, let's look at what Merkle Proof is. A Merkle proof is a cryptographic technique used to prove the existence (or non-existence) to prove the existence of a specific piece of data within a larger dataset stored in a Merkle Tree without revealing the entire dataset. It is a method for efficient data verification. It's like providing evidence that a particular item is in a box without opening the box or showing its contents. This cryptographic technique enables the efficient verification of data within a larger dataset without revealing the entire dataset. 
+While a Merkle Tree provides a summarized view of data, a Merkle proof is used to prove the existence (or non-existence) to prove the existence of a specific piece of data within a larger dataset stored in a Merkle Tree without revealing the entire dataset. It's like providing evidence that a particular item is in a box without opening the box or showing its contents. This cryptographic technique enables the efficient verification of data within a larger dataset without revealing the entire dataset. 
 
 ## Structure of a Merkle Proof:
 - **Leaf Nodes**: In a Merkle Tree, the individual data items (in this case, email addresses) are stored as leaf nodes at the bottom of the tree. Each leaf node is hashed (usually using a cryptographic hash function) to produce a unique hash value.
 - **Intermediate Nodes**: Above the leaf nodes are intermediate nodes. These nodes are created by hashing pairs of leaf nodes. The process continues until you have a single root hash at the top of the tree.
 - **Merkle Path**: A Merkle Proof consists of the path from the leaf node containing the data you want to prove (the target) up to the root node. This path includes the hashes of all the sibling nodes along the way.
 
-## How Do Merkle Proofs Work?
-Imagine you're building a decentralized application (DApp) where you want to grant access only to users with specific email addresses. To efficiently manage access control, you can use a Merkle Tree to whitelist email addresses. For this example, we'll use the `merkletreejs` library to implement the Merkle Tree.
+## How Does Merkle Proofs Work?
+Assuming we want to whitelist three email addresses but ensure they remain private. We'll use a Merkle Tree to store them securely, and Merkle Proofs to verify their inclusion without revealing all the email addresses. For this example, we'll use the `merkletreejs` library to implement the Merkle Tree.
 
-Here's how you can do it:
-- Before we start, make sure you have Node.js and npm (Node Package Manager) installed on your system. You can download and install Node.js from the official [website] (https://nodejs.org/)
+Here's a step-by-step guide on how to do it:
+
+### Step 1: Setting Up the Project
+
+- Ensure that you have Node.js and npm (Node Package Manager) installed on your system. If not, you can download and install them from the official [Node.js website](https://nodejs.org/).
 
 - Create a new directory for your project and navigate to it in your terminal:
 
@@ -80,7 +109,7 @@ cd merkle-proof-tutorial
 npm init -y
 ```
 
-This command will create a `package.json` file in your project directory.
+This command will generate a `package.json` file in your project directory.
 
 - Install the `merkletreejs` library using npm:
 
@@ -88,20 +117,20 @@ This command will create a `package.json` file in your project directory.
 npm install merkletreejs
 ```
 
-This will download and install the library and its dependencies.
+This will download and install the library along with its dependencies.
 
 - Create a new JavaScript file in your project directory, e.g., `merkleTreeWhitelist.js`, and open it in a code editor of your choice.
 
-In your js file add the following code below
+## Step 2: Construct the Merkle Tree
 
-- Import the `merkletreejs` and the  Node's built-in`crypto` modulelibrary at the beginning of the file.
+- At the beginning of the `merkleTreeWhitelist.js` file, import the `merkletreejs` library and Node's built-in `crypto` module:
 
 ```javascript
 import { MerkleTree } from 'merkletreejs';
 import crypto from 'crypto';
 ```
 
-- Define the list of whitelisted email addresses in the `emailAddresses` array.
+- Define the list of whitelisted email addresses in the `emailAddresses` array:
 
 ```javascript
 // List of whitelisted email addresses
@@ -112,7 +141,7 @@ const emailAddresses = [
 ];
 ```
 
-- For security and privacy, hash the email addresses:
+- For security and privacy reasons, hash the email addresses:
 
 ```javascript
 const hashedAddresses = emailAddresses.map(email => Buffer.from(sha256(email), 'hex'));
@@ -125,6 +154,10 @@ const hashedAddresses = emailAddresses.map(email => Buffer.from(sha256(email), '
 const merkleTree = new MerkleTree(hashedAddresses, sha256Buffer);
 ```
 
+In this step, we've created the Merkle Tree using our list of email addresses. This process involves hashing each email address to form the leaves of the tree. These leaves are then paired and hashed again to create the next layer, and this process continues until we have a single hash, known as the Merkle Root.
+
+### Step 3: Verifying with Merkle Proofs
+
 - Now, you can verify if an email address is on your whitelist. For example, let's check if `ama@example.com` is on the whitelist:
 
 ```javascript
@@ -133,7 +166,6 @@ const hashedTargetEmail = Buffer.from(sha256(targetEmail), 'hex');
 ```
 
 - Check if the hashed email exists in your list, generate a Merkle Proof if it does, and then verify its authenticity:
-
 
 ```javascript
 const targetIndex = hashedAddresses.indexOf(hashedTargetEmail);
@@ -151,7 +183,10 @@ if (targetIndex === -1) {
   }
 }
 ```
-- Lastly, define two hashing functions:
+
+### Step 4: Hashing Functions
+
+To ensure the security and consistency of our data, we use hashing functions to process the emails. Here, we define two hashing functions:
 
 ```javascript
 function sha256(data) {
@@ -163,22 +198,22 @@ function sha256Buffer(data) {
 }
 ```
 
+These hashing functions transform our email addresses into fixed-size strings of characters, representing the data.
+
+### Step 5: Execute the Code
+
 - Save the `merkleTreeWhitelist.js` file and run it using Node.js:
 
 ```bash
 node merkleTreeWhitelist.js
 ```
 
-You'll see the output, which will tell you whether `ama@example.com` is on the whitelist or not.
+You'll see the output, which will inform you whether `ama@example.com` is on the whitelist or not. Using `merklekjs`, we've built a Merkle Tree from a list of email addresses, generated a Merkle Proof for a specific email, and verified its presence. This process demonstrates how Merkle Trees provide an efficient way to prove the existence of data without revealing the entire dataset, ensuring both data integrity and privacy.
 
-![whitelist-output](/images/whitelist.png)
-
-
-This above code example demonstrates the entire process of setting up, creating a Merkle Tree, generating a Merkle Proof, and verifying the proof for whitelisting email addresses in a web3 application.
-
-
-## Merkle Trees vs. Merkle Proofs
+## Usescase of Merkle Trees and Merkle Proofs
 While Merkle Trees and Merkle Proofs have their distinct primary functions, they often work hand-in-hand to achieve data integrity, verification, and efficiency in various applications, most notably in blockchains and cryptographic systems.
+
+### Merkle Tree usecase
 
 - **Data Integrity**:  Merkle Trees, with their hierarchical structure, enable efficient verification of large sets of data. The topmost hash (Merkle root) represents a summary of all the data below it. If any piece of data changes, the Merkle root will change as well.
 
@@ -186,7 +221,7 @@ While Merkle Trees and Merkle Proofs have their distinct primary functions, they
 
 - **Privacy**:  Merkle Trees can provide a summary (via the Merkle root) without revealing the individual data elements. This is useful in systems where privacy or data size might be a concern.
 
-**Merkle Proofs**
+### Merkle Proofs usecase
 
 - **Membership Verification**: Merkle Proofs allow for the verification of a specific piece of data's membership within a set, without revealing or processing the entire set. This is especially useful in systems like blockchains where a lightweight client wants to verify a particular transaction without downloading the entire blockchain.
 
